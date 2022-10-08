@@ -3,8 +3,8 @@
 ;思路:输出两个字符，一个是商，一个是余数(DIV)
 DATAS SEGMENT  
     X DB ?
-    SHANG DB ?
-    YU DB ?
+    SHANG DB ?	;定义变量,存储商,准确来说是存储 运算结果的第一个字符
+    YU DB ?	;存余数，预算结果的第二个字符
 DATAS ENDS
 
 STACKS SEGMENT
@@ -16,40 +16,40 @@ CODES SEGMENT
 START:
     MOV AX,DATAS
     MOV DS,AX
-
-	MOV AH,1
-	INT 21H
-	MOV X,AL 
+    
+    MOV AH,1	;从键盘中读取X
+    INT 21H
+    MOV X,AL 
 	
-	MOV AH,1
-	INT 21H
-	ADD X,AL
+    MOV AH,1	;读取Y
+    INT 21H
+    ADD X,AL
 	
-	MOV AH,1
-	INT 21H   
-	SUB X,AL 
-	MOV AL,X
-	SUB AL,30H
+    MOV AH,1
+    INT 21H   
+    SUB X,AL 
+    MOV AL,X
+    SUB AL,30H
 	
-	MOV AH,0
-    	MOV BL,10
-	DIV BL
-	MOV SHANG,AL
-	MOV YU,AH
+    MOV AH,0
+    MOV BL,10
+    DIV BL	;无符号除法,商存于AL;余数存在AH
+    MOV SHANG,AL
+    MOV YU,AH
 	
-	MOV AH,2
-	MOV DL,0AH
-	INT 21H
+    MOV AH,2	;打印换行符
+    MOV DL,0AH
+    INT 21H
 	
-	MOV AH,2
-	ADD SHANG,30H
-	MOV DL,SHANG
-	INT 21H
+    MOV AH,2
+    ADD SHANG,30H
+    MOV DL,SHANG
+    INT 21H
 	
-	MOV AH,2
-	ADD YU,30H
-	MOV DL,YU
-	INT 21H
+    MOV AH,2
+    ADD YU,30H
+    MOV DL,YU
+    INT 21H
 
     MOV AH,4CH
     INT 21H

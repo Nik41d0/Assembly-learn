@@ -3,8 +3,8 @@
 ;思路:同样是输出两个字符，一个是 负号，一个是运算结果的 绝对值(NEG)
 DATAS SEGMENT  
     X DB ?
-    SHANG DB ?
-    YU DB ?
+    SHANG DB ?	;存储负号
+    YU DB ?	
 DATAS ENDS
 
 STACKS SEGMENT
@@ -17,34 +17,33 @@ START:
     MOV AX,DATAS
     MOV DS,AX
 
-	MOV AH,1
-	INT 21H
-	MOV X,AL 
+    MOV AH,1	;读取X
+    INT 21H
+    MOV X,AL 
 	
-	MOV AH,1
-	INT 21H
-	ADD X,AL
+    MOV AH,1	;读取Y
+    INT 21H
+    ADD X,AL
 	
-	MOV AH,1
-	INT 21H   
-	SUB X,AL
-	SUB X,30H
-	NEG X 
-	MOV AL,X
+    MOV AH,1	
+    INT 21H   
+    SUB X,AL
+    SUB X,30H
+    NEG X	;求补运算,相当于 0-X 	
 	
-	MOV AH,2
-	MOV DL,0AH
-	INT 21H
+    MOV AH,2	;输出换行符
+    MOV DL,0AH
+    INT 21H
 	
-	MOV AH,2
-	ADD SHANG,"-"
-	MOV DL,SHANG
-	INT 21H
+    MOV AH,2	;输出负号
+    ADD SHANG,"-"
+    MOV DL,SHANG
+    INT 21H
 	
-	MOV AH,2
-	ADD X,30H
-	MOV DL,X
-	INT 21H
+    MOV AH,2
+    ADD X,30H
+    MOV DL,X
+    INT 21H
 
     MOV AH,4CH
     INT 21H

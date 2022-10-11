@@ -17,13 +17,21 @@ START:
     MOV AX,DATAS
     MOV DS,AX
     
-    MOV AH,1	;从键盘中读取X
+    MOV AH,1	
     INT 21H
     MOV X,AL 
+    	
+    MOV AH,2
+    MOV DL,"+"
+    INT 21H
 	
-    MOV AH,1	;读取Y
+    MOV AH,1	
     INT 21H
     ADD X,AL
+	
+    MOV AH,2
+    MOV DL,"-"
+    INT 21H
 	
     MOV AH,1
     INT 21H   
@@ -33,12 +41,12 @@ START:
 	
     MOV AH,0
     MOV BL,10
-    DIV BL	;无符号除法,商存于AL;余数存在AH
+    DIV BL	
     MOV SHANG,AL
     MOV YU,AH
 	
-    MOV AH,2	;打印换行符
-    MOV DL,0AH
+    MOV AH,2	
+    MOV DL,"="
     INT 21H
 	
     MOV AH,2

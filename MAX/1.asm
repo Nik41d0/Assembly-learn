@@ -1,3 +1,4 @@
+;只能求 三个数中最大的值(一位数),负数还尚未涉猎
 DATAS SEGMENT
 	X DB ?
 	Y DB ?

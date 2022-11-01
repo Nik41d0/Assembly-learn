@@ -8,7 +8,7 @@ DATAS SEGMENT
     STRING DB 'Please input your data','$'
     MESG1 DB 0DH,0AH,'what is your name?$'
     MESG2 DB '?(Y/N)$'
-    BUF DB 30 ? 30 DUP(?)
+    BUF DB 30,?,30 DUP(?)
 
    
 DATAS ENDS

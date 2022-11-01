@@ -1,6 +1,5 @@
 ;输出1+2+3+……N 的和>500时的值 和 N的值
 DATAS SEGMENT
-    
     SUM DW ?
     N DW ?  
 DATAS ENDS

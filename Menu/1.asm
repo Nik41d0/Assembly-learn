@@ -177,7 +177,7 @@ LP11:
     INT 21H    
     
     MOV BL,10    
-    MOV AH,0   ;去掉此语句会出现什么情况？
+    MOV AH,0   
     MOV AL,X
     IDIV BL
  

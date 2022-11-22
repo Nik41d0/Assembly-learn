@@ -11,6 +11,16 @@ DATAS SEGMENT
     X DW ?
     Y DW ?
     CHUSHU DW 10
+PRINTF MACRO A
+    MOV AH,9
+    LEA DX,A
+    INT 21H
+    ENDM
+FUHAO MACRO A
+    MOV AH,2
+    MOV DL,A
+    INT 21H
+    ENDM
 DATAS ENDS
 
 STACKS SEGMENT
@@ -40,16 +50,6 @@ EXIT:
     MOV AH,4CH
     INT 21H
 
-PRINTF MACRO A
-    MOV AH,9
-    LEA DX,A
-    INT 21H
-    ENDM
-FUHAO MACRO A
-    MOV AH,2
-    MOV DL,A
-    INT 21H
-    ENDM
 GETNUM PROC	
     MOV   BX, 0         ;每个从键盘接收的多位数最终放BX，再送内存单元NUM2
 LP01:  

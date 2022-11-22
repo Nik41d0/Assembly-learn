@@ -1,5 +1,5 @@
 ; 减法和除法做得不够好，加法和乘法还凑合
-DATAS SEGMENT 
+DATAS SEGMENT
     STR1 DB 13,10,"|**** Press 1 is ADD ****|","$"
     STR2 DB 13,10,"|**** Press 2 is SUB ****|","$"
     STR3 DB 13,10,"|**** Press 3 is MUL ****|","$"
@@ -50,12 +50,13 @@ EXIT:
     MOV AH,4CH
     INT 21H
 
+
 GETNUM PROC	
     MOV   BX, 0         ;每个从键盘接收的多位数最终放BX，再送内存单元NUM2
 LP01:  
     MOV AH, 1
     INT 21H
-    CMP AL," "
+   	CMP AL," "
     JE LP02       
     SUB AL,30H
        
@@ -78,25 +79,6 @@ ERROR1:
 LP02:
     RET 
 GETNUM ENDP
-
-PRINT PROC      
-    MOV CX,0     ;此CX用于记录每个元素在分离时入栈次数
-LP05:		
-    MOV AX,BX
-    CWD
-    DIV CHUSHU	
-    PUSH DX       ;入栈的是余数
-    INC CX
-    MOV BX,AX     ;保存商       
-    CMP AX,0    ;商不为0,继续送BX除10
-    JNZ LP05
-LP06:		
-    POP DX        ;;全部分离完,出栈依次从高到低显示
-    MOV AH,2
-    ADD DL,30H
-    INT 21H
-    LOOP LP06     
-PRINT ENDP
 
 OPT1 PROC
     PRINTF STR11
@@ -165,6 +147,24 @@ OPT4 PROC
     CALL PRINT
     RET
 OPT4 ENDP
+PRINT PROC      
+    MOV CX,0     ;此CX用于记录每个元素在分离时入栈次数
+LP05:		
+    MOV AX,BX
+    CWD
+    DIV CHUSHU	
+    PUSH DX       ;入栈的是余数
+    INC CX
+    MOV BX,AX     ;保存商       
+    CMP AX,0    ;商不为0,继续送BX除10
+    JNZ LP05
+LP06:		
+    POP DX        ;;全部分离完,出栈依次从高到低显示
+    MOV AH,2
+    ADD DL,30H
+    INT 21H
+    LOOP LP06     
+PRINT ENDP
 
 MAIN PROC
     PRINTF STR1
